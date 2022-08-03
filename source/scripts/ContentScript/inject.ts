@@ -105,7 +105,7 @@ async function handleRequest (req) {
 
   if(req.method === 'eth_sendTransaction') {
     const result = await eth.getMethod('wallet.sendTransaction')(req.params[0])
-    return '0x' + result.hash
+    return result;
   }
 
   if(req.method === 'eth_accounts') {

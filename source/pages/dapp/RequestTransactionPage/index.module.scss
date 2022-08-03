@@ -1,0 +1,299 @@
+.page {
+  width: 100vw;
+  height: 100vh;
+  background: url('../../../assets/images/bg_mnemonic.png');
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow-y: auto;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 1;
+    pointer-events: none;
+    transition: all 0.3s;
+    backdrop-filter: blur(20px);
+    z-index: 0;
+  }
+
+  @include mediumMedia {
+    &::before {
+      opacity: 1;
+      backdrop-filter: blur(5px);
+    }
+  }
+
+  @include smallMedia {
+    &::before {
+      opacity: 0;
+      backdrop-filter: blur(0);
+    }
+  }
+
+  .inner {
+    z-index: 1;
+    width: 375px;
+    height: 600px;
+    box-sizing: border-box;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+
+    section.header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 16px;
+
+      & img {
+        height: 24px;
+        width: auto;
+        margin-right: 6px;
+      }
+
+      & > button {
+        background: rgba(255, 255, 255, 0.17);
+      }
+
+      & > label {
+        display: block;
+        text-align: center;
+        font-size: 22px;
+        font-weight: 400;
+        line-height: 15.85px;
+        color: $textColor;
+        margin-top: 20px;
+      }
+    }
+
+    section.content {
+      margin-top: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+
+      .subhead {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        height: 64px;
+        position: relative;
+
+        .left {
+          width: 50%;
+          backdrop-filter: blur(10px);
+          border: 1px solid rgba(#ffffff, 0.3);
+          border-radius: 14px 0 0 14px;
+          padding: 14px;
+          display: flex;
+          align-items: center;
+        }
+
+        & img {
+          height: 36px;
+          width: auto;
+          padding-right: 10px;
+        }
+
+        .right {
+          width: 50%;
+          border: 1px solid rgba(#ffffff, 0.3);
+          backdrop-filter: blur(10px);
+          border-radius: 0 14px 14px 0;
+          padding: 14px 28px;
+          display: flex;
+          align-items: center;
+        }
+
+        .arrow {
+          position: absolute;
+          top: 14px;
+          left: calc(50% - 18px);
+          width: 36px;
+          height: 36px;
+          border: 1px solid rgba(#ffffff, 0.3);
+          border-radius: 50%;
+          backdrop-filter: blur(10px);
+        }
+      }
+
+      .basic {
+        width: 100%;
+        padding: 24px;
+        background: rgba(90, 89, 126, 0.39);
+        backdrop-filter: blur(7px);
+        border-radius: 14px;
+        display: flex;
+        flex-direction: column;
+        margin-top: 24px;
+
+        .url {
+          color: #ffffff;
+          font-weight: 400;
+          font-size: 13px;
+          line-height: 16px;
+          opacity: 0.51;
+          margin-bottom: 18px;
+        }
+
+        .function {
+          padding: 9px 17px;
+          font-weight: 500;
+          font-size: 14px;
+          line-height: 21px;
+          color: #ffffff;
+          opacity: 0.51;
+          background: rgba(90, 89, 126, 0.39);
+          margin-bottom: 15px;
+          backdrop-filter: blur(7px);
+          border-radius: 5px;
+          width: fit-content;
+        }
+
+        .fee {
+          font-weight: 500;
+          font-size: 36px;
+          line-height: 47px;
+          font-family: DM Mono;
+          color: #fafbfb;
+          text-shadow: 0px 0px 11.4544px rgba(177, 204, 255, 0.89);
+          text-overflow: ellipsis;
+          overflow: hidden;
+        }
+      }
+
+      .nav {
+        display: flex;
+        align-items: flex-end;
+        padding: 0;
+        border-bottom: 1px solid rgba(#ffffff, 0.15);
+        width: 100%;
+        margin-top: 24px;
+
+        .tabnav {
+          font-family: Poppins;
+          font-style: normal;
+          font-weight: 500;
+          font-size: 16px;
+          display: flex;
+          align-items: flex-end;
+
+          color: #ffffff;
+          padding: 12px 12px;
+          width: fit-content;
+          user-select: none;
+          cursor: pointer;
+          opacity: 0.6;
+          border-bottom: 2px solid transparent;
+          &:active {
+            opacity: 0.7;
+          }
+        }
+        .tabnav_active {
+          opacity: 1;
+          border-bottom: 2px solid #2496ff;
+        }
+      }
+
+      .layout {
+        margin-top: 16px;
+        width: 100%;
+        margin-bottom: 150px;
+
+        .data {
+          width: 100%;
+          padding: 24px;
+          background: rgba(90, 89, 126, 0.39);
+          backdrop-filter: blur(7px);
+          border-radius: 14px;
+          word-break: break-all;
+        }
+
+        .feeLabel {
+          font-family: 'Poppins';
+          font-style: normal;
+          font-weight: 500;
+          font-size: 17px;
+          line-height: 27px;
+          /* identical to box height */
+
+          color: #ffffff;
+        }
+
+        .feePrice {
+          font-family: 'DM Mono';
+          font-style: normal;
+          font-weight: 500;
+          font-size: 10px;
+          line-height: 18px;
+          color: #ffffff;
+        }
+        .feePriceUSD {
+          font-family: 'DM Mono';
+          font-style: normal;
+          font-weight: 500;
+          font-size: 11px;
+          line-height: 14px;
+          letter-spacing: 0.025em;
+
+          /* Brand / Forest Green / 100% */
+
+          color: #55d171;
+        }
+
+        .feeSelectCont {
+          display: flex;
+          height: 94px;
+          flex: 1;
+          justify-content: center;
+          flex-direction: column;
+          padding: 12px;
+        }
+        .feeSelectCont_selected {
+          background: rgba(255, 255, 255, 0.13);
+          border-radius: 14px;
+        }
+        .feeSelector {
+          width: 100%;
+          margin: 0;
+          display: flex;
+          background: rgba(90, 89, 126, 0.39);
+          backdrop-filter: blur(7px);
+          /* Note: backdrop-filter has minimal browser support */
+
+          border-radius: 14px;
+          cursor: pointer;
+          user-select: none;
+          &:active {
+            opacity: 0.7;
+          }
+        }
+      }
+
+      .footer {
+        height: 180px;
+        position: fixed;
+        bottom: 0;
+        width: $appWidth;
+        padding: 0 14px;
+        background: #34343447;
+        backdrop-filter: blur(7px);
+
+        .actions {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          column-gap: 15px;
+          width: 100%;
+        }
+      }
+    }
+  }
+}

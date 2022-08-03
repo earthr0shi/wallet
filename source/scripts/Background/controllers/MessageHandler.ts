@@ -110,6 +110,39 @@ export const messagesHandler = (
         );
         result = await provider.send(args[0], args[1]);
       } else if (method === 'wallet.sendTransaction') {
+        const windowId = uuid();
+        const txRequest = args[0];
+        mainController.dapp.setSignatureRequest(txRequest, windowId);
+        const popup = await mainController.createPopup(windowId, 'request');
+        pendingWindow = true;
+        window.addEventListener(
+          'sendTransaction',
+          async (ev: any) => {
+            if (ev.detail.substring(1) === windowId) {
+              port.postMessage({
+                id: message.id,
+                data: { hash: 'hello' },
+              });
+              pendingWindow = false;
+            }
+          },
+          {
+            once: true,
+            passive: true,
+          }
+        );
+
+        browser.windows.onRemoved.addListener((id) => {
+          if (popup && id === popup.id) {
+            port.postMessage({
+              id: message.id,
+              data: { result: 'USER_REJECTED' },
+            });
+            pendingWindow = false;
+          }
+        });
+
+        return Promise.resolve(null);
       } else if (method === 'wallet.signMessage') {
         mainController.dapp.setSignatureType('personal_sign');
         const signatureRequest = args[0];
@@ -118,7 +151,7 @@ export const messagesHandler = (
         const popup = await mainController.createPopup(windowId, 'sign');
         pendingWindow = true;
         window.addEventListener(
-          'signTypedData',
+          'signMessage',
           async (ev: any) => {
             if (ev.detail.substring(1) === windowId) {
               const result = mainController.dapp.getApprovedIdentityJSON();

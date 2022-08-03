@@ -7,6 +7,7 @@ import SignTransactionPage from '~pages/dapp/SignTransactionPage';
 import queryString from 'query-string';
 import ToastProvider from '~components/ToastProvider';
 import UnsignedApprovePage from '~pages/dapp/UnsignedApprovePage';
+import RequestTransactionPage from '~pages/dapp/RequestTransactionPage';
 
 function wrapWithErrorBoundary(
   component: React.ReactElement,
@@ -27,7 +28,6 @@ const DappRouter = () => {
     config: { duration: 100 },
   });
 
-
   return (
     <>
       {transitions.map(({ item, props, key }) => (
@@ -43,9 +43,13 @@ const DappRouter = () => {
           <ToastProvider>
             <Switch location={item}>
               <Route path="/dapp.html">
-                {route
-                  ? <Redirect to={`/${route}${location.search}${location.hash}`} />
-                  : <Redirect to={`/connect${location.search}${location.hash}`} />}
+                {route ? (
+                  <Redirect
+                    to={`/${route}${location.search}${location.hash}`}
+                  />
+                ) : (
+                  <Redirect to={`/connect${location.search}${location.hash}`} />
+                )}
               </Route>
               <Route path="/connect">
                 {wrapWithErrorBoundary(<ConnectDappPage />, 'connect')}
@@ -55,6 +59,9 @@ const DappRouter = () => {
               </Route>
               <Route path="/approve">
                 {wrapWithErrorBoundary(<UnsignedApprovePage />, 'approve')}
+              </Route>
+              <Route path="/request">
+                {wrapWithErrorBoundary(<RequestTransactionPage />, 'request')}
               </Route>
             </Switch>
           </ToastProvider>

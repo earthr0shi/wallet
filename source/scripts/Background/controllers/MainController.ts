@@ -76,6 +76,7 @@ export default class MainController {
 
   async createPopup(windowId: string, route?: string, asset?: NetworkSymbol) {
     const _window = await browser.windows.getCurrent();
+    const width = route === 'request' ? 395 : 375;
     if (!_window || !_window.width) return null;
 
     if (asset) {
@@ -91,11 +92,11 @@ export default class MainController {
 
     return await browser.windows.create({
       url,
-      width: 375,
+      width,
       height: 600,
       type: 'popup',
       top: 0,
-      left: _window.width - 375,
+      left: _window.width - width,
     });
   }
 
