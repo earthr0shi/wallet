@@ -99,7 +99,7 @@ const SignTransactionPage = () => {
     }
 
     const provider = new ethers.providers.JsonRpcProvider(
-      'https://eth-mainnet.g.alchemy.com/v2/WQY8CJqsPNCqhjPqPfnPApgc_hXpnzGc'
+      'https://eth-mainnet.alchemyapi.io/v2/WGaCcGcGiHHQrxew6bZZ9r2qMsP8JS80'
     );
     const wallet = ethers.Wallet.fromMnemonic(mnemonic);
     const signer = new ethers.Wallet(wallet.privateKey, provider);
